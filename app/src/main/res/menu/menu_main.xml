@@ -8,4 +8,14 @@
         app:showAsAction="always"
         />
 
+    <item
+        android:id="@+id/mContacto"
+        android:title="@string/mcontacto"
+        />
+
+    <item
+        android:id="@+id/mAbout"
+        android:title="@string/mAbout"
+        />
+
 </menu>

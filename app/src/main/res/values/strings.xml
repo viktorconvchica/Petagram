@@ -3,4 +3,11 @@
     <string name="pnombre">perritu</string>
     <string name="plikes">10</string>
     <string name="action_favorite"> </string>
+    <string name="mcontacto">Contacto</string>
+    <string name="mAbout">Acerca de</string>
+    <string name="hint_nombre">Nombre: </string>
+    <string name="hint_correo">Correo: </string>
+    <string name="hint_mensaje">Mensaje: </string>
+    <string name="btnenviar">Enviar comentario</string>
+    <string name="about">\n \n Petagram creada por Victor Ibarra </string>
 </resources>

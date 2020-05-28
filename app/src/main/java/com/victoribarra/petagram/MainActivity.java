@@ -42,12 +42,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.action_favoritos){
-            Intent favoritos = new Intent(this, favoritos.class );
-            startActivity(favoritos);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_favoritos:
+                Intent favoritos = new Intent(this, favoritos.class );
+                startActivity(favoritos);
+                return true;
+            case R.id.mContacto:
+                Intent contactos = new Intent(this,Contacto.class);
+                startActivity(contactos);
+                return true;
+            case R.id.mAbout:
+                Intent about = new Intent(this,acerca.class);
+                startActivity(about);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
     public void inicializarlistamascotas (){
