@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     tools:context=".MainActivity">
 
-    <include android:id="@+id/appbar"
-        layout="@layout/toolbar"
-        />
+   <com.google.android.material.appbar.AppBarLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMascota"
+       <androidx.appcompat.widget.Toolbar
+           android:id="@+id/toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_scrollFlags="scroll|enterAlways"
+           > </androidx.appcompat.widget.Toolbar>
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/tabLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </com.google.android.material.tabs.TabLayout>
+   </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_below="@id/appbar"
-        />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -26,11 +43,10 @@
         android:focusable="true"
         app:srcCompat="@android:drawable/btn_star_big_on"
         android:backgroundTint="@color/Fab"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        />
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp" />
 
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

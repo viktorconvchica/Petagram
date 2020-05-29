@@ -3,34 +3,36 @@ package com.victoribarra.petagram;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.material.tabs.TabLayout;
+import com.victoribarra.petagram.adapter.Page_adapter;
+import com.victoribarra.petagram.fragment.Perfil_fragment;
+import com.victoribarra.petagram.fragment.Recyclerview_fragment;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ArrayList <Mascota> mascotas;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inicializartoolbar();
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        setUpViewPager();
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-
-        recyclerView = findViewById(R.id.rvMascota);
-        recyclerView.setLayoutManager(llm);
-        inicializarlistamascotas();
-        inicializarAdaptador();
 
     }
 
@@ -62,28 +64,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private ArrayList<Fragment> agregarfragments(){
+        ArrayList<Fragment> fragments = new ArrayList<>();
 
-    public void inicializarlistamascotas (){
-        mascotas= new ArrayList<Mascota>();
-
-        mascotas.add(new Mascota("perro1",R.drawable.perro1,10));
-        mascotas.add(new Mascota("perro2",R.drawable.perro2,10));
-        mascotas.add(new Mascota("perro3",R.drawable.perro3,10));
-        mascotas.add(new Mascota("perro4",R.drawable.perro4,10));
-        mascotas.add(new Mascota("perro5",R.drawable.perro5,10));
-        mascotas.add(new Mascota("perro6",R.drawable.perro6,10));
-        mascotas.add(new Mascota("perro7",R.drawable.perro7,10));
-    }
-
-    public void inicializarAdaptador(){
-        MascotaAdaptador adaptador = new MascotaAdaptador(mascotas);
-        recyclerView.setAdapter(adaptador);
-
+        fragments.add(new Recyclerview_fragment());
+        fragments.add(new Perfil_fragment());
+        return fragments;
 
     }
+    private void setUpViewPager(){
+        viewPager.setAdapter(new Page_adapter(getSupportFragmentManager(), agregarfragments()));
+        tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.icons8_cucha_64);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icons8_perro_64);
+
+    }
+
+
 
     public void inicializartoolbar(){
-        Toolbar miActionBar = findViewById(R.id.appbar);
+        Toolbar miActionBar = findViewById(R.id.toolbar);
         setSupportActionBar(miActionBar);
         getSupportActionBar().setIcon(R.drawable.icons8_huella_de_gato_24);
         getSupportActionBar().setTitle("     Petagram");

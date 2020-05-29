@@ -1,4 +1,4 @@
-package com.victoribarra.petagram;
+package com.victoribarra.petagram.pojo;
 
 public class Mascota {
     private String nombre;

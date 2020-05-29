@@ -1,6 +1,5 @@
-package com.victoribarra.petagram;
+package com.victoribarra.petagram.adapter;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.victoribarra.petagram.pojo.Mascota;
+import com.victoribarra.petagram.R;
 
 import java.util.ArrayList;
 

@@ -2,4 +2,5 @@
 <resources>
     <dimen name="margen">10sp</dimen>
     <dimen name="nombrecv">20sp</dimen>
+    <dimen name="fotoperfil">200dp</dimen>
 </resources>
