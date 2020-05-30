@@ -1,6 +1,7 @@
 package com.victoribarra.petagram.pojo;
 
 public class Mascota {
+    private int id;
     private String nombre;
     private int likes;
     private int foto;
@@ -46,5 +47,13 @@ public class Mascota {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -72,6 +72,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
          private ImageView imgFotoCV;
          private ImageButton btnLike;
 
+
         public MascotaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreCV  = itemView.findViewById(R.id.tvNombre);
