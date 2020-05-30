@@ -17,6 +17,10 @@ public class Mascota {
 
     }
 
+    public Mascota() {
+
+    }
+
     public int getLikes() {
         return likes;
     }

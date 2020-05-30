@@ -1,5 +1,6 @@
 package com.victoribarra.petagram.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import com.victoribarra.petagram.R;
@@ -16,7 +17,7 @@ public class ConstructorMascotas {
 
     public ArrayList<Mascota> obtenerDatos(){
 
-       ArrayList<Mascota> mascotas= new ArrayList<Mascota>();
+      /* ArrayList<Mascota> mascotas= new ArrayList<Mascota>();
 
         mascotas.add(new Mascota("perro1",R.drawable.perro1,10));
         mascotas.add(new Mascota("perro2",R.drawable.perro2,10));
@@ -27,6 +28,30 @@ public class ConstructorMascotas {
         mascotas.add(new Mascota("perro7",R.drawable.perro7,10));
 
         return mascotas;
+*/
+      BaseDatos db = new BaseDatos(context);
+      insertar3Mascotas(db);
+      return db.obtenerTodasLasMascotas();
+
+    }
+
+    public void insertar3Mascotas (BaseDatos db){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_NOMBRE, "perro1");
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_FOTO, R.drawable.perro1);
+
+        db.insertarMascota(contentValues);
+
+        contentValues = new ContentValues();
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_NOMBRE, "perro2");
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_FOTO, R.drawable.perro2);
+
+        db.insertarMascota(contentValues);
+        contentValues = new ContentValues();
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_NOMBRE, "perro3");
+        contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_FOTO, R.drawable.perro3);
+
+        db.insertarMascota(contentValues);
 
 
     }
