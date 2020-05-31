@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.strictmode.SqliteObjectLeakedViolation;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class BaseDatos extends SQLiteOpenHelper {
 
     private Context context;
+
 
     public BaseDatos(@Nullable Context context) {
         super(context,ConstanteBaseDatos.DATABASE_NAME,null,ConstanteBaseDatos.DATABASE_VERSION);
@@ -38,8 +40,16 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "REFERENCES " + ConstanteBaseDatos.TABLE_MASCOTAS + "("+ConstanteBaseDatos.TABLE_MASCOTAS_ID+")" +
                 ")";
 
+        String queryCrearTablaFavoritos = "CREATE TABLE " + ConstanteBaseDatos.TABLE_FAVORITOS + " ( " +
+                ConstanteBaseDatos.TABLE_FAVORITOS_ID       + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_NOMBRE    + " TEXT," +
+                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_FOTO      + " INTEGER, " +
+                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_LIKES      + " INTEGER " +
+                ")";
+
         db.execSQL(queryCrearTablaMascota);
         db.execSQL(queryCrearTablaLikes);
+        db.execSQL(queryCrearTablaFavoritos);
 
     }
 
@@ -63,6 +73,7 @@ public class BaseDatos extends SQLiteOpenHelper {
            mascotaActual.setId(registros.getInt(0));
            mascotaActual.setNombre(registros.getString(1));
            mascotaActual.setFoto(registros.getInt(2));
+
 
            mascotas.add(mascotaActual);
 
@@ -99,5 +110,45 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.close();
 
         return  likes;
+    }
+
+    public ArrayList<Mascota> obtenertodosFavoritos (){
+        ArrayList<Mascota> mascotas= new ArrayList<>();
+
+        String query = "SELECT * FROM " + ConstanteBaseDatos.TABLE_FAVORITOS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query,null);
+
+        while(registros.moveToNext()){
+            Mascota mascotaActual = new Mascota();
+            mascotaActual.setId(registros.getInt(0));
+            mascotaActual.setNombre(registros.getString(1));
+            mascotaActual.setFoto(registros.getInt(2));
+            mascotaActual.setLikes(registros.getInt(3));
+
+            mascotas.add(mascotaActual);
+
+        }
+        db.close();
+        return mascotas;
+    }
+
+
+
+    public void insertarFavorito(ContentValues contentValues,int i, int j){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (i <=5) {
+
+            db.insert(ConstanteBaseDatos.TABLE_FAVORITOS, null, contentValues);
+            Toast.makeText(context,String.valueOf(i),Toast.LENGTH_SHORT).show();
+        }
+        else {
+            db.update(ConstanteBaseDatos.TABLE_FAVORITOS,contentValues,ConstanteBaseDatos.TABLE_FAVORITOS_ID + " = " + String.valueOf(j),null);
+            Toast.makeText(context,String.valueOf(j),Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
+
     }
 }

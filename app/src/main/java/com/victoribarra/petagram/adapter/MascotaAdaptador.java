@@ -2,6 +2,8 @@ package com.victoribarra.petagram.adapter;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,12 @@ import java.util.ArrayList;
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.MascotaViewHolder> {
     private  ArrayList<Mascota> mascotas;
     Activity activity;
+    private int favoritossize ;
+    private int updateindex ;
+
+
+
+
 
 
     public MascotaAdaptador(ArrayList<Mascota> mascotas,Activity activity){
@@ -43,6 +51,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
       mascotaViewHolder.imgFotoCV.setImageResource(datos.getFoto());
 
 
+
       mascotaViewHolder.btnLike.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -50,6 +59,30 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
               ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
               constructorMascotas.darLikeMascota(datos);
               mascotaViewHolder.tvLikesCV.setText(String.valueOf( constructorMascotas.obtenerLikeMascota(datos)));
+              SharedPreferences preferences;
+              preferences = activity.getSharedPreferences("Share", Context.MODE_PRIVATE);
+              favoritossize = preferences.getInt("size",1);
+              updateindex = preferences.getInt("index",1);
+              constructorMascotas.insertar1favorito(datos,favoritossize,updateindex);
+              favoritossize++;
+              SharedPreferences.Editor editor = preferences.edit();
+              editor.putInt("size",favoritossize);
+              editor.commit();
+              if (favoritossize>=4){
+                  updateindex= preferences.getInt("index",0);
+                  updateindex++;
+                  editor.putInt("index",updateindex);
+                  editor.commit();
+              }
+              if (updateindex>5){
+                  updateindex=1;
+                  editor.putInt("index",updateindex);
+                  editor.commit();
+              }
+
+
+
+
 
           }
       });

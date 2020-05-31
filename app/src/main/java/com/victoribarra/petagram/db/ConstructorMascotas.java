@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.victoribarra.petagram.R;
+import com.victoribarra.petagram.favoritos;
 import com.victoribarra.petagram.pojo.Mascota;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class ConstructorMascotas {
 
     private Context context;
+
     public ConstructorMascotas(Context context) {
         this.context = context;
     }
@@ -41,6 +43,7 @@ public class ConstructorMascotas {
         contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_NOMBRE, "perro1");
         contentValues.put(ConstanteBaseDatos.TABLE_MASCOTAS_FOTO, R.drawable.perro1);
 
+
         db.insertarMascota(contentValues);
 
         contentValues = new ContentValues();
@@ -67,5 +70,25 @@ public class ConstructorMascotas {
     public int obtenerLikeMascota (Mascota mascota){
         BaseDatos db = new BaseDatos(context);
         return  db.obtenerLike(mascota);
+    }
+
+    public ArrayList<Mascota> obtenerFavoritos(){
+
+        BaseDatos db = new BaseDatos(context);
+        return db.obtenertodosFavoritos();
+
+    }
+
+    public void insertar1favorito (Mascota mascota,int i, int j){
+        BaseDatos db= new BaseDatos(context);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_NOMBRE, mascota.getNombre());
+        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_FOTO, mascota.getFoto());
+        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_LIKES,obtenerLikeMascota(mascota));
+
+
+        db.insertarFavorito(contentValues,i,j);
+
     }
 }

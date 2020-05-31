@@ -5,9 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.victoribarra.petagram.adapter.MascotaAdaptador;
+import com.victoribarra.petagram.db.ConstructorMascotas;
 import com.victoribarra.petagram.pojo.Mascota;
 
 import java.util.ArrayList;
@@ -16,14 +19,18 @@ public class favoritos extends AppCompatActivity {
 
     private RecyclerView recyclerfavoritos;
     private ArrayList<Mascota> favoritos;
+    private ConstructorMascotas constructorMascotas;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
         inicializartoolbar();
-        generarLayoutManager();
         recyclerfavoritos = findViewById(R.id.rvfavoritos);
+        generarLayoutManager();
         inicializarfavoritos();
         inicializarAdaptador();
     }
@@ -39,12 +46,8 @@ public class favoritos extends AppCompatActivity {
     public void inicializarfavoritos (){
         favoritos= new ArrayList<Mascota>();
 
-       /* favoritos.add(new Mascota("perro1",R.drawable.perro1,10));
-        favoritos.add(new Mascota("perro2",R.drawable.perro2,10));
-        favoritos.add(new Mascota("perro3",R.drawable.perro3,10));
-        favoritos.add(new Mascota("perro4",R.drawable.perro4,10));
-        favoritos.add(new Mascota("perro5",R.drawable.perro5,10));
-        */
+        constructorMascotas= new ConstructorMascotas(getBaseContext());
+        favoritos= constructorMascotas.obtenerFavoritos();
 
     }
 
