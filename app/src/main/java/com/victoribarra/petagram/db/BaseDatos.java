@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 
 import androidx.annotation.Nullable;
 
@@ -74,5 +75,29 @@ public class BaseDatos extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ConstanteBaseDatos.TABLE_MASCOTAS,null,contentValues);
         db.close();
+    }
+
+    public void insertarLike(ContentValues contentValues){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(ConstanteBaseDatos.TABLE_LIKES,null,contentValues);
+        db.close();
+    }
+    public  int obtenerLike ( Mascota mascota) {
+        int likes =0;
+
+        String query = "SELECT COUNT ("+ConstanteBaseDatos.TABLE_LIKES_TOTAL+")" +
+                " FROM " + ConstanteBaseDatos.TABLE_LIKES +
+                " WHERE " + ConstanteBaseDatos.TABLE_LIKES_ID_MASCOTA + "=" + mascota.getId();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query,null);
+
+        if (registros.moveToNext()){
+            likes = registros.getInt(0);
+
+        }
+        db.close();
+
+        return  likes;
     }
 }

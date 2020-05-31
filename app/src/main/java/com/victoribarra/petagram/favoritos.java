@@ -22,12 +22,8 @@ public class favoritos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
         inicializartoolbar();
-
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-
+        generarLayoutManager();
         recyclerfavoritos = findViewById(R.id.rvfavoritos);
-        recyclerfavoritos.setLayoutManager(llm);
         inicializarfavoritos();
         inicializarAdaptador();
     }
@@ -43,17 +39,24 @@ public class favoritos extends AppCompatActivity {
     public void inicializarfavoritos (){
         favoritos= new ArrayList<Mascota>();
 
-        favoritos.add(new Mascota("perro1",R.drawable.perro1,10));
+       /* favoritos.add(new Mascota("perro1",R.drawable.perro1,10));
         favoritos.add(new Mascota("perro2",R.drawable.perro2,10));
         favoritos.add(new Mascota("perro3",R.drawable.perro3,10));
         favoritos.add(new Mascota("perro4",R.drawable.perro4,10));
         favoritos.add(new Mascota("perro5",R.drawable.perro5,10));
+        */
 
     }
 
     public void inicializarAdaptador(){
-        MascotaAdaptador adaptador = new MascotaAdaptador(favoritos);
+        MascotaAdaptador adaptador = new MascotaAdaptador(favoritos,this);
         recyclerfavoritos.setAdapter(adaptador);
 
+    }
+
+    public void generarLayoutManager (){
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerfavoritos.setLayoutManager(llm);
     }
 }

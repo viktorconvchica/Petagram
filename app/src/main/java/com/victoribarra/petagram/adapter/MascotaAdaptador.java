@@ -1,6 +1,7 @@
 package com.victoribarra.petagram.adapter;
 
-import android.graphics.Color;
+
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.victoribarra.petagram.db.ConstructorMascotas;
 import com.victoribarra.petagram.pojo.Mascota;
 import com.victoribarra.petagram.R;
 
@@ -18,9 +20,12 @@ import java.util.ArrayList;
 
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.MascotaViewHolder> {
     private  ArrayList<Mascota> mascotas;
+    Activity activity;
 
-    public MascotaAdaptador(ArrayList<Mascota> mascotas){
+
+    public MascotaAdaptador(ArrayList<Mascota> mascotas,Activity activity){
         this.mascotas =mascotas;
+        this.activity = activity;
     }
 
     @NonNull
@@ -37,23 +42,15 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
       mascotaViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
       mascotaViewHolder.imgFotoCV.setImageResource(datos.getFoto());
 
+
       mascotaViewHolder.btnLike.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            if (datos.isLiked()){
-                datos.setLiked(false);
-                datos.setLikes(datos.getLikes()-1);
-                mascotaViewHolder.btnLike.setColorFilter(Color.BLACK);
-                mascotaViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
 
-            }
-            else {
-                datos.setLiked(true);
-                datos.setLikes(datos.getLikes()+1);
-                mascotaViewHolder.btnLike.setColorFilter(Color.BLUE);
-                mascotaViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
+              ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+              constructorMascotas.darLikeMascota(datos);
+              mascotaViewHolder.tvLikesCV.setText(String.valueOf( constructorMascotas.obtenerLikeMascota(datos)));
 
-            }
           }
       });
 

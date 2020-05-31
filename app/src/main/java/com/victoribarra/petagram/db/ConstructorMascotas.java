@@ -2,6 +2,7 @@ package com.victoribarra.petagram.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.victoribarra.petagram.R;
 import com.victoribarra.petagram.pojo.Mascota;
@@ -54,5 +55,17 @@ public class ConstructorMascotas {
         db.insertarMascota(contentValues);
 
 
+    }
+    public void  darLikeMascota (Mascota mascota){
+        BaseDatos db = new BaseDatos(context);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstanteBaseDatos.TABLE_LIKES_ID_MASCOTA,mascota.getId());
+        contentValues.put(ConstanteBaseDatos.TABLE_LIKES_TOTAL,1);
+        db.insertarLike(contentValues);
+    }
+
+    public int obtenerLikeMascota (Mascota mascota){
+        BaseDatos db = new BaseDatos(context);
+        return  db.obtenerLike(mascota);
     }
 }
