@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Petagram</string>
-    <string name="pnombre">perritu</string>
+    <string name="pnombre">perritu \n oli \n oli</string>
     <string name="plikes">10</string>
     <string name="action_favorite"> </string>
     <string name="mcontacto">Contacto</string>
@@ -10,6 +10,10 @@
     <string name="hint_mensaje">Mensaje: </string>
     <string name="btnenviar">Enviar comentario</string>
     <string name="about">\n \n Petagram creada por Victor Ibarra </string>
+    <string name="mCuenta">Configurar cuenta</string>
+    <string name="btnEnviarcuenta">Guardar Cuenta</string>
+    <string name="hintcuenta">Escribe tu usuario</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

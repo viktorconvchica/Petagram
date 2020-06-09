@@ -1,24 +1,38 @@
 package com.victoribarra.petagram.pojo;
 
 public class Mascota {
-    private int id;
-    private String nombre;
+    private String id;
+    private String username;
     private int likes;
-    private int foto;
-    private boolean liked ;
+    private String urlfoto;
+    private String caption;
 
-    public Mascota(String nombre,int foto,int likes){
-        this.nombre = nombre;
+
+    public Mascota(String username,String urlfoto,int likes){
+        this.username = username;
         this.likes  = likes;
-        this.foto   = foto;
-        this.liked  = false;
-
-
+        this.urlfoto   = urlfoto;
 
     }
 
     public Mascota() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getLikes() {
@@ -29,35 +43,19 @@ public class Mascota {
         this.likes = likes;
     }
 
-    public int getFoto() {
-        return foto;
+    public String getUrlfoto() {
+        return urlfoto;
     }
 
-    public void setFoto(int foto) {
-        this.foto = foto;
+    public void setUrlfoto(String urlfoto) {
+        this.urlfoto = urlfoto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCaption() {
+        return caption;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public boolean isLiked() {
-        return liked;
-    }
-
-    public void setLiked(boolean liked) {
-        this.liked = liked;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 }

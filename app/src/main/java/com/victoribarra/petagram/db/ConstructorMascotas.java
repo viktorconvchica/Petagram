@@ -83,8 +83,8 @@ public class ConstructorMascotas {
         BaseDatos db= new BaseDatos(context);
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_NOMBRE, mascota.getNombre());
-        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_FOTO, mascota.getFoto());
+        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_NOMBRE, mascota.getUsername());
+        contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_FOTO, mascota.getUrlfoto());
         contentValues.put(ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_LIKES,obtenerLikeMascota(mascota));
 
 

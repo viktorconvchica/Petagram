@@ -33,8 +33,8 @@ public class PerfilAdaptador extends RecyclerView.Adapter<PerfilAdaptador.Perfil
     @Override
     public void onBindViewHolder(@NonNull final PerfilViewHolder perfilViewHolder, int position) {
         final Mascota datos = mascotas.get(position);
-        perfilViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
-        perfilViewHolder.imgFotoCV.setImageResource(datos.getFoto());
+        perfilViewHolder.tvCaptionPerfil.setText(String.valueOf(datos.getLikes()));
+        //perfilViewHolder.imgFotoCV.setImageResource(datos.get());
 
     }
 
@@ -47,15 +47,15 @@ public class PerfilAdaptador extends RecyclerView.Adapter<PerfilAdaptador.Perfil
     public static class PerfilViewHolder extends RecyclerView.ViewHolder {
 
 
-        private TextView tvLikesCV;
+        private TextView tvCaptionPerfil;
         private ImageView imgFotoCV;
 
 
         public PerfilViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvLikesCV   = itemView.findViewById(R.id.tvLikesperfil);
-            imgFotoCV   = itemView.findViewById(R.id.imgPerfil);
+            tvCaptionPerfil   = itemView.findViewById(R.id.tvcaptionperfil);
+            imgFotoCV         = itemView.findViewById(R.id.imgPerfil);
 
         }
     }

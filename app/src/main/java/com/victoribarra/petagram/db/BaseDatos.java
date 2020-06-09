@@ -70,9 +70,9 @@ public class BaseDatos extends SQLiteOpenHelper {
 
        while(registros.moveToNext()){
            Mascota mascotaActual = new Mascota();
-           mascotaActual.setId(registros.getInt(0));
-           mascotaActual.setNombre(registros.getString(1));
-           mascotaActual.setFoto(registros.getInt(2));
+           mascotaActual.setId(registros.getString(0));
+           mascotaActual.setUsername(registros.getString(1));
+           mascotaActual.setUrlfoto(registros.getString(2));
 
 
            mascotas.add(mascotaActual);
@@ -121,9 +121,9 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         while(registros.moveToNext()){
             Mascota mascotaActual = new Mascota();
-            mascotaActual.setId(registros.getInt(0));
-            mascotaActual.setNombre(registros.getString(1));
-            mascotaActual.setFoto(registros.getInt(2));
+            mascotaActual.setId(registros.getString(0));
+            mascotaActual.setUsername(registros.getString(1));
+            mascotaActual.setUrlfoto(registros.getString(2));
             mascotaActual.setLikes(registros.getInt(3));
 
             mascotas.add(mascotaActual);

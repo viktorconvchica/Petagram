@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.victoribarra.petagram.db.ConstructorMascotas;
 import com.victoribarra.petagram.pojo.Mascota;
 import com.victoribarra.petagram.R;
@@ -25,11 +26,6 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     Activity activity;
     private int favoritossize ;
     private int updateindex ;
-
-
-
-
-
 
     public MascotaAdaptador(ArrayList<Mascota> mascotas,Activity activity){
         this.mascotas =mascotas;
@@ -46,9 +42,10 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     @Override
     public void onBindViewHolder(@NonNull final MascotaViewHolder mascotaViewHolder, int position) {
       final Mascota datos = mascotas.get(position);
-      mascotaViewHolder.tvNombreCV.setText(datos.getNombre());
+      mascotaViewHolder.tvCaption.setText(datos.getUsername()+" "+ datos.getCaption());
       mascotaViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
-      mascotaViewHolder.imgFotoCV.setImageResource(datos.getFoto());
+      Picasso.get().load(datos.getUrlfoto()).into(mascotaViewHolder.imgFotoCV);
+      //mascotaViewHolder.imgFotoCV.setImageResource(datos.getUrlfoto());
 
 
 
@@ -97,7 +94,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
     public static class MascotaViewHolder extends RecyclerView.ViewHolder {
 
-         private TextView tvNombreCV;
+         private TextView tvCaption;
          private TextView tvLikesCV;
          private ImageView imgFotoCV;
          private ImageButton btnLike;
@@ -105,7 +102,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
         public MascotaViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvNombreCV  = itemView.findViewById(R.id.tvNombre);
+            tvCaption   = itemView.findViewById(R.id.tvCaption);
             tvLikesCV   = itemView.findViewById(R.id.tvLikes);
             imgFotoCV   = itemView.findViewById(R.id.imgFoto);
             btnLike     = itemView.findViewById(R.id.btnLike);

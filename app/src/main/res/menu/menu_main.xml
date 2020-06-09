@@ -18,4 +18,9 @@
         android:title="@string/mAbout"
         />
 
+    <item
+        android:id="@+id/mCuenta"
+        android:title="@string/mCuenta"
+        />
+
 </menu>
