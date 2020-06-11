@@ -44,7 +44,8 @@ public class BaseDatos extends SQLiteOpenHelper {
                 ConstanteBaseDatos.TABLE_FAVORITOS_ID       + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_NOMBRE    + " TEXT," +
                 ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_FOTO      + " INTEGER, " +
-                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_LIKES      + " INTEGER " +
+                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_LIKES      + " INTEGER, " +
+                ConstanteBaseDatos.TABLE_FAVORITOS_MASCOTA_CAPTION     + " INTEGER " +
                 ")";
 
         db.execSQL(queryCrearTablaMascota);

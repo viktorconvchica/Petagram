@@ -12,9 +12,11 @@
         android:layout_height="@dimen/fotoperfil"
         android:src="@drawable/perro1"
         android:layout_gravity="center"
+        android:id="@+id/fotoperfil"
         />
 
     <TextView
+        android:id="@+id/tvusername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/pnombre"

@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/perro1"
             android:contentDescription="a"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             />
 
         <LinearLayout
@@ -43,7 +44,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/pnombre"
                 android:textSize="@dimen/nombrecv"
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/margen"
@@ -51,7 +51,6 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 />
-
             <TextView
                 android:id="@+id/tvLikes"
                 android:layout_width="wrap_content"
@@ -72,6 +71,8 @@
                 android:layout_weight="0"
                 android:layout_gravity="end"
                 android:src="@drawable/hueso_amarillo"/>
+
+
 
         </LinearLayout>
 

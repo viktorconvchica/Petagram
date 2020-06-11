@@ -20,4 +20,6 @@ public  final class ConstanteBaseDatos {
     public static final  String TABLE_FAVORITOS_MASCOTA_NOMBRE = "mascota_nombre";
     public static final  String TABLE_FAVORITOS_MASCOTA_FOTO = "mascota_foto";
     public static final  String TABLE_FAVORITOS_MASCOTA_LIKES = "mascota_likes";
+    public static final  String TABLE_FAVORITOS_MASCOTA_CAPTION = "mascota_caption";
+
 }

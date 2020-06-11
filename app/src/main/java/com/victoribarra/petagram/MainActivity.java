@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.victoribarra.petagram.adapter.Page_adapter;
@@ -23,17 +24,29 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public String token ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inicializartoolbar();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            token =extras.getString("token");
+
+
+        }
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         setUpViewPager();
 
 
+
+    }
+
+    public String getToken(){
+        return token;
     }
 
     @Override
@@ -60,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.mCuenta:
                 Intent Cuenta = new Intent(this, Cuenta.class);
+                startActivity(Cuenta);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 

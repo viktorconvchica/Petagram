@@ -2,9 +2,11 @@ package com.victoribarra.petagram.presentador;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.victoribarra.petagram.Cuenta;
 import com.victoribarra.petagram.db.ConstructorMascotas;
 import com.victoribarra.petagram.fragment.IReciclerViewFragmentView;
 import com.victoribarra.petagram.pojo.Mascota;
@@ -24,6 +26,7 @@ public class ReciclerViewFragmentPresenter implements IReciclerviewFragmentPrese
     private Context context;
     private ConstructorMascotas constructorMascotas;
     private ArrayList<Mascota> mascotas;
+    private String token;
 
     public ReciclerViewFragmentPresenter(IReciclerViewFragmentView iReciclerViewFragmentView, Context context){
         this.iReciclerViewFragmentView = iReciclerViewFragmentView;
@@ -31,6 +34,16 @@ public class ReciclerViewFragmentPresenter implements IReciclerviewFragmentPrese
        // obtenerMascotasBaseDatos();
         obtenerMedios();
     }
+
+
+
+    public ReciclerViewFragmentPresenter(IReciclerViewFragmentView iReciclerViewFragmentView, Context context, String token) {
+        this.iReciclerViewFragmentView = iReciclerViewFragmentView;
+        this.context = context;
+        this.token = token;
+        obtenerPerfil(token);
+    }
+
     @Override
     public void obtenerMascotasBaseDatos() {
         constructorMascotas= new ConstructorMascotas(context);
@@ -64,11 +77,42 @@ public class ReciclerViewFragmentPresenter implements IReciclerviewFragmentPrese
 
     }
 
+    public void obtenerPerfil(String token){
+        RestAPIAdapter restAPIAdapter =new RestAPIAdapter();
+        Gson gsonmediarecent = restAPIAdapter.construyeGsonDeserializador();
+        EndpointsApi endpointsApi = restAPIAdapter.establecerConexionRestAPIInstagram(gsonmediarecent);
+        String url = " https://graph.instagram.com/me/media?fields=media_url,caption,username&access_token="+token;
+        Call<MascotaResponse> mascotaResponseCall= endpointsApi.ObtenerPer(url);
+
+
+        mascotaResponseCall.enqueue(new Callback<MascotaResponse>() {
+            @Override
+            public void onResponse(Call<MascotaResponse> call, Response<MascotaResponse> response) {
+                MascotaResponse mascotaResponse = response.body();
+                mascotas = mascotaResponse.getMascotas();
+                mostrarperfil();
+
+            }
+
+            @Override
+            public void onFailure(Call<MascotaResponse> call, Throwable t) {
+                Toast.makeText(context, "algo fallo",Toast.LENGTH_SHORT).show();
+                Log.e("fallo la conexion", t.toString());
+
+            }
+        });
+
+    }
+
     @Override
     public void mostrarMascotasRV() {
 
         iReciclerViewFragmentView.inicializarAdaptadorRV(iReciclerViewFragmentView.crearAdaptador(mascotas));
         iReciclerViewFragmentView.generarLinearLayoutVertical();
+    }
 
+    public void  mostrarperfil (){
+        iReciclerViewFragmentView.inicializaradaptadorper(iReciclerViewFragmentView.crearperfiladaptador(mascotas));
+        iReciclerViewFragmentView.generarLinearLayoutVertical();
     }
 }

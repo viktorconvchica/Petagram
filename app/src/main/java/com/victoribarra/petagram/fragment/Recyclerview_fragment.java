@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.victoribarra.petagram.R;
 import com.victoribarra.petagram.adapter.MascotaAdaptador;
+import com.victoribarra.petagram.adapter.PerfilAdaptador;
 import com.victoribarra.petagram.pojo.Mascota;
 import com.victoribarra.petagram.presentador.IReciclerviewFragmentPresenter;
 import com.victoribarra.petagram.presentador.ReciclerViewFragmentPresenter;
@@ -59,6 +60,16 @@ public class Recyclerview_fragment extends Fragment implements IReciclerViewFrag
     @Override
     public void inicializarAdaptadorRV(MascotaAdaptador adaptador) {
         recyclerView.setAdapter(adaptador);
+
+    }
+
+    @Override
+    public PerfilAdaptador crearperfiladaptador(ArrayList<Mascota> mascotas) {
+        return null;
+    }
+
+    @Override
+    public void inicializaradaptadorper(PerfilAdaptador adaptador) {
 
     }
 }

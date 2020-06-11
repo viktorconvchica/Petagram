@@ -42,7 +42,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     @Override
     public void onBindViewHolder(@NonNull final MascotaViewHolder mascotaViewHolder, int position) {
       final Mascota datos = mascotas.get(position);
-      mascotaViewHolder.tvCaption.setText(datos.getUsername()+" "+ datos.getCaption());
+      mascotaViewHolder.tvCaption.setText(datos.getCaption());
       mascotaViewHolder.tvLikesCV.setText(String.valueOf(datos.getLikes()));
       Picasso.get().load(datos.getUrlfoto()).into(mascotaViewHolder.imgFotoCV);
       //mascotaViewHolder.imgFotoCV.setImageResource(datos.getUrlfoto());
@@ -103,9 +103,9 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
         public MascotaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCaption   = itemView.findViewById(R.id.tvCaption);
-            tvLikesCV   = itemView.findViewById(R.id.tvLikes);
             imgFotoCV   = itemView.findViewById(R.id.imgFoto);
             btnLike     = itemView.findViewById(R.id.btnLike);
+            tvLikesCV   = itemView.findViewById(R.id.tvLikes);
 
         }
     }

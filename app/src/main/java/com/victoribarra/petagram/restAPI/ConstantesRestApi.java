@@ -9,5 +9,13 @@ public final class ConstantesRestApi {
     public static final String FIELDS              = "id,username,media_url,caption";
     public static final String KEY_ACCESS_TOKEN    = "&access_token=";
     public static final String URL_GET_INFORMATION = KEY_GET_INFORMATION+KEY_FIELDS+FIELDS+KEY_ACCESS_TOKEN+ACCESS_TOKEN;
+    public static final String URL_DYNAMIC         = KEY_GET_INFORMATION+KEY_FIELDS+FIELDS+KEY_ACCESS_TOKEN;
     // https://graph.instagram.com/me/media?fields=media_url,caption,username&access_token=
+
+    public static  final String USUARIO1 = "viktorconvchica";
+    public static  final String USUARIO2 = "mochileroslag";
+
+    public static  final String ACCESS_TOKEN2="IGQVJYdzY4OXJWa2ZA5WmhCV0tiNzBJOHI1bW4xUWp2TzNJTGp1SGpBcDV2MnE5dEdkTjNRb0ctRU9uWXV5TWRhdnRlZAXYzYVpyUmNMOTY0UzdtMU1sQzJ2VVc2TEJGblBOVEFrbE9GaFRVM1k3TUVWUQZDZD";
+
+
 }

@@ -46,7 +46,7 @@
         android:text="@string/btnEnviarcuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCuenta"
-        android:backgroundTint=" "
+        android:background= "?android:attr/selectableItemBackground"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
