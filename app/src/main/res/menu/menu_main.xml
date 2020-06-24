@@ -23,4 +23,9 @@
         android:title="@string/mCuenta"
         />
 
+    <item
+        android:id="@+id/mNotificaciones"
+        android:title="Recibir Notificaciones"
+        />
+
 </menu>

@@ -24,4 +24,13 @@ public class RestAPIAdapter {
         gsonBuilder.registerTypeAdapter(MascotaResponse.class, new Mascotadeserializador());
         return gsonBuilder.create();
     }
+
+    public EndpointsApi establecerConexionHeroku(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ConstantesRestApi.ROOT_URL_HEROKU)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                ;
+        return  retrofit.create(EndpointsApi.class);
+    }
 }

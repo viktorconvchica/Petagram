@@ -21,8 +21,15 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.victoribarra.petagram.adapter.Page_adapter;
 import com.victoribarra.petagram.fragment.Perfil_fragment;
 import com.victoribarra.petagram.fragment.Recyclerview_fragment;
+import com.victoribarra.petagram.restAPI.EndpointsApi;
+import com.victoribarra.petagram.restAPI.adapter.RestAPIAdapter;
+import com.victoribarra.petagram.restAPI.model.UsuarioResponse;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public String token ;
+    public String idDispositivo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +49,10 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             token =extras.getString("token");
-
-
         }
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         setUpViewPager();
-
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
 
     }
 
@@ -100,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent Cuenta = new Intent(this, Cuenta.class);
                 startActivity(Cuenta);
                 return true;
+
+            case R.id.mNotificaciones:
+                recibirNotificaciones();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -131,5 +121,62 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(miActionBar);
         getSupportActionBar().setIcon(R.drawable.icons8_huella_de_gato_24);
         getSupportActionBar().setTitle("     Petagram");
+    }
+
+    public void recibirNotificaciones(){
+        if (idDispositivo != null){
+            if (token != null){
+                RestAPIAdapter restAPIAdapter = new RestAPIAdapter();
+                EndpointsApi endpointsApi = restAPIAdapter.establecerConexionHeroku();
+                Call<UsuarioResponse> usuarioResponseCall = endpointsApi.registrarUsuario(idDispositivo,token);
+
+                usuarioResponseCall.enqueue(new Callback<UsuarioResponse>() {
+                    @Override
+                    public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
+                        UsuarioResponse usuarioResponse = response.body();
+                        Log.d("idAutogenerado",usuarioResponse.getIdAutogenerado());
+                        Log.d("idDispositivo",usuarioResponse.getDispositivo());
+                        Log.d("idInsta",usuarioResponse.getInstagram());
+                    }
+
+                    @Override
+                    public void onFailure(Call<UsuarioResponse> call, Throwable t) {
+
+                    }
+                });
+            }
+            else{
+                Toast.makeText(MainActivity.this, "configura tu cuenta de instagram", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            obtenerIdDispositivo();
+            if (idDispositivo != null) {
+                recibirNotificaciones();
+            }
+        }
+    }
+
+    public void obtenerIdDispositivo(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        idDispositivo= msg;
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }
