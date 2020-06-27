@@ -4,12 +4,14 @@ package com.victoribarra.petagram.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +20,20 @@ import com.squareup.picasso.Picasso;
 import com.victoribarra.petagram.db.ConstructorMascotas;
 import com.victoribarra.petagram.pojo.Mascota;
 import com.victoribarra.petagram.R;
+import com.victoribarra.petagram.restAPI.EndpointsApi;
+import com.victoribarra.petagram.restAPI.adapter.RestAPIAdapter;
+import com.victoribarra.petagram.restAPI.model.LikeResponse;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.MascotaViewHolder> {
     private  ArrayList<Mascota> mascotas;
     Activity activity;
+    Context context = activity;
     private int favoritossize ;
     private int updateindex ;
 
@@ -76,6 +86,15 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
                   editor.putInt("index",updateindex);
                   editor.commit();
               }
+              String idDispositivo = preferences.getString("idDispositivo",null);
+              if (idDispositivo !=null){
+                  Toast.makeText(activity,"si paso el dispositivo",Toast.LENGTH_SHORT).show();
+                  registrarLikeFirebase(datos.getId(),idDispositivo,datos.getUsername());
+              }
+              else{
+                  Toast.makeText(activity,"habilita tus notificaciones",Toast.LENGTH_SHORT).show();
+              }
+
 
 
 
@@ -109,4 +128,24 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
         }
     }
+
+    public void registrarLikeFirebase (String idFoto,String idUsuario,String idDispositivo){
+        RestAPIAdapter restAPIAdapter = new RestAPIAdapter();
+        EndpointsApi endpointsApi = restAPIAdapter.establecerConexionHeroku();
+        Call<LikeResponse> likeResponseCall = endpointsApi.registrarLike(idFoto,idUsuario,idDispositivo);
+
+        likeResponseCall.enqueue(new Callback<LikeResponse>() {
+            @Override
+            public void onResponse(Call<LikeResponse> call, Response<LikeResponse> response) {
+                LikeResponse likeResponse = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<LikeResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.victoribarra.petagram.restAPI;
 
+import com.victoribarra.petagram.restAPI.model.LikeResponse;
 import com.victoribarra.petagram.restAPI.model.MascotaResponse;
 import com.victoribarra.petagram.restAPI.model.UsuarioResponse;
 
@@ -23,6 +24,8 @@ public interface EndpointsApi {
     @POST(ConstantesRestApi.KEY_POST_REGISTRO)
     Call<UsuarioResponse> registrarUsuario(@Field("id_dispositivo") String id_dispositivo,@Field("id_usuario_instagram")String id_instagram);
 
-
+    @FormUrlEncoded
+    @POST(ConstantesRestApi.KEY_POST_LIKES)
+        Call<LikeResponse> registrarLike(@Field("id_foto_instagram") String foto,@Field("id_dispositivo") String dispositivo,@Field("id_usuario_instagram" )String usuario);
 
 }

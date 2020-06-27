@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.victoribarra.petagram.adapter.MascotaAdaptador;
 import com.victoribarra.petagram.adapter.Page_adapter;
 import com.victoribarra.petagram.fragment.Perfil_fragment;
 import com.victoribarra.petagram.fragment.Recyclerview_fragment;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     public String token ;
     public String idDispositivo;
+
 
 
     @Override
@@ -173,8 +178,17 @@ public class MainActivity extends AppCompatActivity {
                         // Log and toast
                         String msg = getString(R.string.msg_token_fmt, token);
                         Log.d(TAG, msg);
-                        idDispositivo= msg;
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                       // Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //guardar token de dispositivo en shared preferences
+                        SharedPreferences preferences;
+                        preferences = MainActivity.this.getSharedPreferences("Share", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("idDispositivo",token);
+                        editor.commit();
+                        idDispositivo= preferences.getString("idDispositivo",null);
+
+
                     }
                 });
 
