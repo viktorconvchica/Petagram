@@ -13,9 +13,14 @@
     <string name="mCuenta">Configurar cuenta</string>
     <string name="btnEnviarcuenta">Guardar Cuenta</string>
     <string name="hintcuenta">Escribe tu usuario</string>
+    <string name="nPerfil">Abrir perfil</string>
+    <string name="nFollow">Follow</string>
+    <string name="nUsuario">Ver usuario</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
 </resources>

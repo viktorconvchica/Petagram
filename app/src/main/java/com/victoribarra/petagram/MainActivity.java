@@ -51,13 +51,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inicializartoolbar();
+        SharedPreferences preferences;
+        preferences = MainActivity.this.getSharedPreferences("Share", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            token =extras.getString("token");
+            editor.putString("tokenperfil",extras.getString("token"));
+            editor.commit();
         }
+        token= preferences.getString("tokenperfil",null);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         setUpViewPager();
+
+        viewPager.setCurrentItem(1);
 
     }
 
